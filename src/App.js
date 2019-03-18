@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import MainLayout from './layouts/MainLayout'
+import Anecdotes from './containers/AnecdoteList'
+import { addAnecdotes } from './actions'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <MainLayout>
+        <div className="text-center m-3">
+          <h1>Anecdotes</h1>
+        </div>
+        <Anecdotes />
+      </MainLayout>
+    )
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addAnecdotes: anecdotes => dispatch(addAnecdotes(anecdotes))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App)

@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from './../components/FooterComponent'
 
 class MainLayout extends React.Component {
   render() {
@@ -7,6 +8,7 @@ class MainLayout extends React.Component {
         <div className="container">
           <div className="mt-5">
             {this.props.children}
+            <Footer/>
           </div>
         </div>
       </div>

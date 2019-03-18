@@ -1,5 +1,5 @@
 const api = {
-  async getAnecdotes(pageSize = 5, afterDate = Date.now()) {
+  async getAnecdotes(pageSize = 10, afterDate = Date.now()) {
     await new Promise(resolve => setInterval(resolve, 1000))
     const result = []
     for (let i = 0; i < pageSize; i++) {

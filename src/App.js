@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Link } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MainLayout from './layouts/MainLayout'
 import Anecdotes from './containers/AnecdoteList'
@@ -15,7 +15,7 @@ class App extends Component {
           <div className="text-center m-3">
             <h1>Anecdotes</h1>
           </div>
-          <div class="container">
+          <div className="container">
             <Nav />
           </div>
           <Route exact path="/" component={Anecdotes}/>

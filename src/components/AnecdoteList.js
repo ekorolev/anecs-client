@@ -8,28 +8,30 @@ class AnecdoteList extends React.Component {
   constructor() {
     super()
 
+    this.state = {
+      hasMore: true
+    }
     this.loadMore = this.loadMore.bind(this)
   }
   async loadMore() {
-    const aneks = await api.getAnecdotes()
-    console.log('yes')
-    try {
-      this.props.addAnecdotes(aneks)
-    } catch(e) {
-      console.log('22')
-      console.log(e)
+    let afterDate
+    if (this.props.anecdotes.length) {
+      afterDate = this.props.anecdotes[this.props.anecdotes.length - 1].createdAt
     }
+    const response = await api.getAnecdotes(undefined, afterDate)
+    this.props.addAnecdotes(response.anecdotes)
+    this.state.hasMore = response.anecdotes.length !== response.count
   }
 
   render() {
     const list = this.props.anecdotes.map(anec => (
-      <li key={anec.id} className="p-2 m-2">
+      <li key={anec._id} className="p-2 m-2">
         <AnecdoteItem data={anec} />
       </li>
     ))
     return (
       <InfiniteScroll
-        hasMore={true}
+        hasMore={this.state.hasMore}
         loader={<LoadingSpinner key={0}/>}
         loadMore={this.loadMore}>
         <ul className="list-unstyled">

@@ -1,16 +1,23 @@
+import axios from 'axios'
+
+const baseUrl = `/`
+
 const api = {
   async getAnecdotes(pageSize = 10, afterDate = Date.now()) {
-    await new Promise(resolve => setInterval(resolve, 1000))
-    const result = []
-    for (let i = 0; i < pageSize; i++) {
-      result.push({
-        id: Math.floor(Math.random() * 10000 + 10000),
-        author: 'admin',
-        createdAt: afterDate - Math.floor(Math.random()*3600000 + 10000000),
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Zenonis est, inquam, hoc Stoici. Sed quae tandem ista ratio est? Minime vero, inquit ille, consentit. Sed ad haec, nisi molestum est, habeo quae velim. Duo Reges: constructio interrete. Quis istud possit, inquit, negare?'
-      })
-    }
-    return result
+    console.log(`pagesize: ${pageSize}, afterDate: ${afterDate}`)
+    return (
+      await axios.get(
+        `${baseUrl}anecdotes?size=${pageSize}&before=${afterDate}`
+      )
+    ).data
+  },
+
+  async getAnecotesCount() {
+    return (await axios.get(`${baseUrl}anecdotes/count`)).data
+  },
+
+  async createAnecdote(data) {
+    return (await axios.post(`${baseUrl}anecdotes/create`, data)).data
   }
 }
 

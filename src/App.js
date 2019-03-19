@@ -3,9 +3,12 @@ import { HashRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MainLayout from './layouts/MainLayout'
 import Anecdotes from './containers/AnecdoteList'
-import AboutPage from './components/AboutPage'
+import AboutPage from './containers/AboutPageCountainer'
+import CreatePage from './containers/CreatePageContainer'
 import Nav from './components/NavComponent'
-import { addAnecdotes } from './actions'
+import { 
+  addAnecdotes
+} from './actions'
 
 class App extends Component {
   render() {
@@ -20,6 +23,7 @@ class App extends Component {
           </div>
           <Route exact path="/" component={Anecdotes}/>
           <Route path="/about" component={AboutPage}/>
+          <Route path="/create" component={CreatePage}/>
         </MainLayout>
       </HashRouter>
     )

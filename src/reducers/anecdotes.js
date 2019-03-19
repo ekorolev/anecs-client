@@ -6,6 +6,11 @@ const anecdotes = (state = [], action) => {
         ...state,
         ...action.anecdotes
       ]
+    case 'ADD_ANECDOTE':
+      return [
+        action.anecdote,
+        ...state
+      ]
     default:
       return state
   }

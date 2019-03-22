@@ -17,7 +17,7 @@ class AnecdoteItem extends React.Component {
             <div className="col-sm text-right">
               <Moment 
                 format="LLL"
-                date={this.props.data.createdAt} />
+                date={this.props.data.publishedAt} />
             </div>
           </div>
 

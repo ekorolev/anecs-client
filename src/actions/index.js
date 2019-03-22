@@ -32,3 +32,6 @@ export const setCredentials = credentials => ({
   type: 'SET_CREDENTIALS',
   credentials
 })
+
+export const setFilterPublished = () => ({type: 'SET_FILTER_PUBLISHED'})
+export const setFilterForPublication = () => ({type: 'SET_FILTER_FOR_PUBLICATION'})

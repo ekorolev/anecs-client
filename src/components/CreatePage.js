@@ -8,6 +8,7 @@ class CreatePage extends React.Component {
     this.state = {
       author: 'admin',
       text: '',
+      status: 'FOR_PUBLICATION'
     }
 
     this.onFieldChange = this.onFieldChange.bind(this)
@@ -21,7 +22,9 @@ class CreatePage extends React.Component {
   async handleSubmit(event) {
     event.preventDefault()
     const response = await api.createAnecdote(this.state)
-    this.props.addAnecdote(response.anecdote)
+    if (this.state.status === 'PUBLISHED') {
+      this.props.addAnecdote(response.anecdote)
+    }
     this.props.history.push('/')
   }
 
@@ -29,6 +32,7 @@ class CreatePage extends React.Component {
     return (
       <form>
         <p className="text-center" style={{ fontSize: '30px' }}>Create an anecdote</p>
+        <a href='/#/anecdotes/unpublished'>Unpublished anecdotes</a>
         <div className="form-group">
           <label htmlFor="authorAnec">Author</label>
           <input 
@@ -38,6 +42,18 @@ class CreatePage extends React.Component {
             name="author"
             className="form-control" 
             id="authorAnec"/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="statusAnec">Author</label>
+          <select
+            onChange={this.onFieldChange}
+            value={this.state.status}
+            name="status"
+            className="form-control"
+            id="statusAnec">
+            <option value="FOR_PUBLICATION">Опубликовать позже</option>
+            <option value="PUBLISHED">Опубликовать сейчас</option>  
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="textAnec">Anecdote's text</label>

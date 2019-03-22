@@ -11,6 +11,10 @@ const anecdotes = (state = [], action) => {
         action.anecdote,
         ...state
       ]
+    case 'SET_ANECDOTES':
+      return [
+        ...action.anecdotes
+      ]
     default:
       return state
   }

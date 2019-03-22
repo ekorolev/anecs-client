@@ -4,7 +4,7 @@ import {
   setCredentials
 } from './actions'
 
-const baseUrl = `http://localhost:2999/`
+const baseUrl = `/`
 
 const authWrapping = async (method, url, data) => {
   const token = store.getState().auth.accessToken

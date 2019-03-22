@@ -8,25 +8,14 @@ class CreatePage extends React.Component {
     this.state = {
       author: 'admin',
       text: '',
-      secretCode: ''
     }
 
-    this.handleAuthorChange = this.handleAuthorChange.bind(this)
-    this.handleTextChange = this.handleTextChange.bind(this)
-    this.handleCodeChange = this.handleCodeChange.bind(this)
+    this.onFieldChange = this.onFieldChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleAuthorChange(event) {
-    this.setState({ author: event.target.value })
-  }
-
-  handleTextChange(event) {
-    this.setState({ text: event.target.value })
-  }
-
-  handleCodeChange(event) {
-    this.setState({ secretCode: event.target.value })
+  onFieldChange(event) {
+    this.setState({[event.target.name]: event.target.value})
   }
 
   async handleSubmit(event) {
@@ -43,26 +32,19 @@ class CreatePage extends React.Component {
         <div className="form-group">
           <label htmlFor="authorAnec">Author</label>
           <input 
-            onChange={this.handleAuthorChange}
+            onChange={this.onFieldChange}
             value={this.state.author} 
-            type="text" 
+            type="text"
+            name="author"
             className="form-control" 
             id="authorAnec"/>
         </div>
         <div className="form-group">
-          <label htmlFor="codeAnec">Secret code</label>
-          <input 
-            onChange={this.handleCodeChange}
-            value={this.state.secretCode} 
-            type="password" 
-            className="form-control" 
-            id="codeAnec"/>
-        </div>
-        <div className="form-group">
           <label htmlFor="textAnec">Anecdote's text</label>
           <textarea 
+            name="text"
             value={this.state.text}
-            onChange={this.handleTextChange}
+            onChange={this.onFieldChange}
             className="form-control" 
             id="textAnec" 
             rows="4"/>

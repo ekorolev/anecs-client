@@ -4,7 +4,7 @@ import {
   setCredentials
 } from './actions'
 
-const baseUrl = `http://localhost:2999/`
+const baseUrl = `/`
 
 const authWrapping = async (method, url, data) => {
   const token = store.getState().auth.accessToken
@@ -41,7 +41,7 @@ const api = {
     console.log(`pagesize: ${pageSize}, afterDate: ${afterDate}`)
     return (
       await axios.get(
-        `${baseUrl}anecdotes?size=${pageSize}&before=${afterDate}`
+        `${baseUrl}anecdotes?size=${pageSize}&before=${new Date(afterDate).getTime()}`
       )
     ).data
   },

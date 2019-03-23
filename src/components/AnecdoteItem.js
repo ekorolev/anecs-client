@@ -12,12 +12,12 @@ class AnecdoteItem extends React.Component {
         <div className="card-footer text-muted">
           <div className="row">
             <div className="col-sm">
-              {this.props.data.author}
+              <small>{this.props.data.author}</small>
             </div>
             <div className="col-sm text-right">
-              <Moment 
-                format="LLL"
-                date={this.props.data.publishedAt} />
+              <small><Moment 
+                format="HH:MM DD.MM.Y"
+                date={this.props.data.publishedAt} /></small>
             </div>
           </div>
 

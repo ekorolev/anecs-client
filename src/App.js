@@ -19,7 +19,7 @@ class App extends Component {
       <HashRouter>
         <MainLayout>
           <div className="text-center m-3">
-            <h1>Anecdotes</h1>
+            <h1>Лучшие анекдоты</h1>
           </div>
           <div className="container">
             <Nav />

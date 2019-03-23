@@ -6,9 +6,9 @@ class Nav extends React.Component {
     let link
 
     if (this.props.location.pathname==='/') {
-      link = <Link to="/about">About</Link>
+      link = <Link to="/about">О проекте</Link>
     } else {
-      link = <Link to="/">Anecdotes</Link>
+      link = <Link to="/">Лента</Link>
     }
 
     return (

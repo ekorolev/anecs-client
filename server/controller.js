@@ -20,6 +20,7 @@ const actionIndex = async (req, res, next) => {
 
 // root (/) should always serve our server rendered page
 router.use('^/$', actionIndex)
+router.get('/favicon.ico', (req, res) => res.sendFile(path.join(__dirname, '../public/favicon.ico')))
 
 // other static resources should just be served as they are
 router.use(express.static(

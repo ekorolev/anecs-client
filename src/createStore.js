@@ -1,3 +1,8 @@
 import AppStore from './store'
-const store = AppStore(window.__REDUX_STATE__ || {})
+let store = null
+if (global.window) {
+  store = AppStore(window.__REDUX_STATE__ || {})
+} else {
+  store = AppStore()
+}
 export default store

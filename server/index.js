@@ -9,7 +9,7 @@ let CERTIFICATE = null
 let CREDENTIALS = {}
 if (process.env.HTTPS) {
   PRIVATE_KEY = fs.readFileSync(process.env.PK_PATH, 'utf8')
-  CERTIFICATE = fs.readFileSync(Process.env.CERT_PATH, 'utf8')
+  CERTIFICATE = fs.readFileSync(process.env.CERT_PATH, 'utf8')
   CREDENTIALS.key = PRIVATE_KEY
   CREDENTIALS.cert = CERTIFICATE
 }

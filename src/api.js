@@ -4,7 +4,12 @@ import {
   setCredentials
 } from './actions'
 
-const baseUrl = `http://0.0.0.0:2999/`
+let baseUrl = ''
+if (global.window) {
+  baseUrl = `http://${window.location.hostname}:2999/`
+} else {
+  baseUrl = 'http://0.0.0.0:2999/'
+}
 
 const authWrapping = async (method, url, data) => {
   const token = store.getState().auth.accessToken

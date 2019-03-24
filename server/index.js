@@ -23,7 +23,11 @@ const app = express()
 
 if (process.env.HTTPS) {
   app.use((req, res, next) => {
-    res.redirect(`https://${req.headers.host}${req.url}`)
+    if (req.protocol === 'http') {
+      res.redirect(`https://${req.headers.host}${req.url}`)
+    } else {
+      next()
+    }
   })
 }
 app.use(indexController)

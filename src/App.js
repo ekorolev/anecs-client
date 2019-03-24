@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MainLayout from './layouts/MainLayout'
 import Anecdotes from './containers/AnecdoteList'
@@ -11,33 +11,46 @@ import {
   addAnecdotes,
   setCredentials
 } from './actions'
-import store from './store'
+import store from './createStore'
 
 class App extends Component {
+  goTo(route) {
+    return () => {
+      this.props.history.push(`/${route}`)
+    }
+  }
   render() {
     return (
-      <HashRouter>
-        <MainLayout>
-          <div className="text-center m-3">
-            <h1>Лучшие анекдоты</h1>
-          </div>
-          <div className="container">
-            <Nav />
-          </div>
-          <Route exact path="/" component={Anecdotes}/>
-          <Route path="/about" component={AboutPage}/>
-          <Route path="/create" component={CreatePage}/>
-          <Route path="/login" component={LoginPage}/>
-        </MainLayout>
-      </HashRouter>
+      <MainLayout>
+        <div className="text-center m-3">
+          <h1>
+            <span onDoubleClick={this.goTo.bind(this)('login')}>
+              Лучшие
+            </span>
+            &nbsp;
+            <span onDoubleClick={this.goTo.bind(this)('create')}>
+              анекдоты
+            </span>
+          </h1>
+        </div>
+        <div className="container">
+          <Nav />
+        </div>
+        <Route exact path="/" component={Anecdotes}/>
+        <Route path="/about" component={AboutPage}/>
+        <Route path="/create" component={CreatePage}/>
+        <Route path="/login" component={LoginPage}/>
+      </MainLayout>
     )
   }
 
   upCredentialsFromLS() {
-    let credentials = localStorage.getItem('credentials')
-    if (credentials) credentials = JSON.parse(credentials)
-    if (!credentials) return
-    store.dispatch(setCredentials(credentials))
+    if (global.window) {
+      let credentials = localStorage.getItem('credentials')
+      if (credentials) credentials = JSON.parse(credentials)
+      if (!credentials) return
+      store.dispatch(setCredentials(credentials))
+    }
   }
 
   async componentWillMount() {
@@ -51,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(withRouter(App))

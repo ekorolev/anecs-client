@@ -19,7 +19,6 @@ const auth = (state = initialState, action) => {
         refreshToken: action.refreshToken
       })
     case 'SET_CREDENTIALS':
-      console.log('set credentials', action.credentials)
       return Object.assign({}, state, action.credentials)
     default:
       return state

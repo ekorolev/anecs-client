@@ -34,7 +34,9 @@ class AboutPage extends React.Component {
   }
 
   async componentDidMount() {
-    this.props.setAnecdotesCount(await api.getAnecotesCount())
+    if (!this.props.anecdotes_count && this.props.anecdotes_count !== 0) {
+      this.props.setAnecdotesCount(await api.getAnecotesCount())
+    }
   }
 }
 

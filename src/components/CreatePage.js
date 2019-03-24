@@ -21,7 +21,8 @@ class CreatePage extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const response = await api.createAnecdote(this.state)
+    let response = await api.createAnecdote(this.state)
+
     if (this.state.status === 'PUBLISHED') {
       this.props.addAnecdote(response.anecdote)
     }
@@ -32,7 +33,6 @@ class CreatePage extends React.Component {
     return (
       <form>
         <p className="text-center" style={{ fontSize: '30px' }}>Create an anecdote</p>
-        <a href='/#/anecdotes/unpublished'>Unpublished anecdotes</a>
         <div className="form-group">
           <label htmlFor="authorAnec">Author</label>
           <input 

@@ -1,5 +1,5 @@
 const initialState = {
-  count: 0
+  count: null
 }
 
 const statistic = (state = initialState, action) => {

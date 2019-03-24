@@ -1,15 +1,14 @@
 import axios from 'axios'
-import store from './store'
+import store from './createStore'
 import {
   setCredentials
 } from './actions'
 
-const baseUrl = `/`
+const baseUrl = `http://0.0.0.0:2999/`
 
 const authWrapping = async (method, url, data) => {
   const token = store.getState().auth.accessToken
   try {
-    console.log(`try request to ${url} with token ${token}`)
     let result = await axios[method](url, data, {
       headers: {
         'Token': token
@@ -18,10 +17,8 @@ const authWrapping = async (method, url, data) => {
     return result
   } catch(e) {
     const credentials = store.getState().auth
-    console.log('old credentials: ', credentials)
     if (e.response.data.message==='TokenExpired') {
       const newData = (await axios.post(`${baseUrl}refresh`, credentials)).data
-      console.log('new data: ', newData)
       const newCredentials = {
         tokenId: credentials.tokenId,
         accessToken: newData.accessToken,
@@ -38,7 +35,6 @@ const authWrapping = async (method, url, data) => {
 
 const api = {
   async getAnecdotes(pageSize = 10, afterDate = Date.now()) {
-    console.log(`pagesize: ${pageSize}, afterDate: ${afterDate}`)
     return (
       await axios.get(
         `${baseUrl}anecdotes?size=${pageSize}&before=${new Date(afterDate).getTime()}`

@@ -1,12 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import App from './App'
-import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { BrowserRouter } from 'react-router-dom'
+import Loadable from 'react-loadable'
+import store from './createStore'
 
-
-ReactDOM.render(
-  <Provider store={store}><App /></Provider>, 
-  document.getElementById('root')
+const AppBundle = (
+  <ReduxProvider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ReduxProvider>
 )
+
+window.onload = async () => {
+  await Loadable.preloadReady()
+  ReactDOM.hydrate(
+    AppBundle,
+    document.getElementById('root')
+  )
+}

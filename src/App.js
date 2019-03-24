@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Redirect, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MainLayout from './layouts/MainLayout'
 import Anecdotes from './containers/AnecdoteList'
 import AboutPage from './containers/AboutPageCountainer'
 import CreatePage from './containers/CreatePageContainer'
 import LoginPage from './containers/LoginPageContainer'
+import NotFound from './components/NotFound'
 import Nav from './components/NavComponent'
 import { 
   addAnecdotes,
@@ -36,10 +37,14 @@ class App extends Component {
         <div className="container">
           <Nav />
         </div>
-        <Route exact path="/" component={Anecdotes}/>
-        <Route path="/about" component={AboutPage}/>
-        <Route path="/create" component={CreatePage}/>
-        <Route path="/login" component={LoginPage}/>
+        <Switch>
+          <Route exact path="/" component={Anecdotes}/>
+          <Route path="/about" component={AboutPage}/>
+          <Route path="/create" component={CreatePage}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/404" component={NotFound}/>
+          <Route render={()=><Redirect to="/404"/>}/>
+        </Switch>
       </MainLayout>
     )
   }

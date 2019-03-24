@@ -6,7 +6,7 @@ import {
 
 let baseUrl = ''
 if (global.window) {
-  baseUrl = `http://${window.location.hostname}:2999/`
+  baseUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.protocol==='https:'?'444':'2999'}/`
 } else {
   baseUrl = 'http://0.0.0.0:2999/'
 }

@@ -21,6 +21,11 @@ const PORT = process.env.PORT || 3000
 // initialize the application and create the routes
 const app = express()
 
+if (process.env.HTTPS) {
+  app.use((req, res, next) => {
+    res.redirect(`https://${req.headers.host}${req.url}`)
+  })
+}
 app.use(indexController)
 
 // start the app

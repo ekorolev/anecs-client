@@ -28,7 +28,7 @@ Loadable.preloadAll().then(() => {
   let httpServer = http.createServer(app)
   let httpsServer = null
   if (process.env.HTTPS) {
-    httpsServer = https.createServer(app, CREDENTIALS)
+    httpsServer = https.createServer(CREDENTIALS, app)
   }
   if (process.env.HTTPS) {
     httpsServer.listen(443, () => console.log(`HTTPS server has started on ${443} port`))
